@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_notes_app/note.dart';
 import 'package:flutter_notes_app/notes_list.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -33,12 +32,22 @@ void main() async {
     ..description = 'The note has been created by this note-taking app itself.'
     ..created = DateTime.now();
 
-  box.put('Note1', note1);
-  box.put('Note2', note2);
-  box.put('Note3', note3);
-  box.put('Note4', note4);
+  // box.put('Note1', note1);
+  // box.put('Note2', note2);
+  // box.put('Note3', note3);
+  // box.put('Note4', note4);
 
   runApp(MyApp());
+}
+
+void addNote(int num) async {
+  var box = await Hive.openBox<Note>('notes');
+  var note = Note()
+    ..title = 'Note $num'
+    ..description = 'The note has been created by this note-taking app itself.'
+    ..created = DateTime.now();
+
+  box.add(note);
 }
 
 class MyApp extends StatelessWidget {
@@ -59,6 +68,7 @@ class MyApp extends StatelessWidget {
 class NoteMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    int i = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter Notes'),
@@ -76,6 +86,10 @@ class NoteMainScreen extends StatelessWidget {
         backgroundColor: Colors.pink,
         child: Icon(Icons.add, color: Colors.white),
         tooltip: 'New Note',
+        onPressed: () {
+          ++i;
+          addNote(i);
+        }
         // onPressed: () {
         //   showDialog(
         //     context: context,

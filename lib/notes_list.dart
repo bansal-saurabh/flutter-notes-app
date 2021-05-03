@@ -74,9 +74,9 @@ class NoteList extends StatelessWidget {
               IconButton(
                 iconSize: 30,
                 icon: Icon(Icons.delete),
-                // onPressed: () {
-                //   note.delete();
-                // },
+                onPressed: () {
+                  note.delete();
+                },
               ),
             ],
           ),
