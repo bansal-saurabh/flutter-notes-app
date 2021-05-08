@@ -64,19 +64,25 @@ class NoteList extends StatelessWidget {
                       '${note.created.second}',
                       style: TextStyle(fontSize: 16, color: Colors.grey[800]),
                     ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          iconSize: 30,
+                          icon: Icon(Icons.edit),
+                        ),
+                        IconButton(
+                          iconSize: 30,
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            note.delete();
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              ),
-              IconButton(
-                iconSize: 30,
-                icon: Icon(Icons.edit),
-              ),
-              IconButton(
-                iconSize: 30,
-                icon: Icon(Icons.delete),
-                onPressed: () {
-                  note.delete();
-                },
               ),
             ],
           ),
