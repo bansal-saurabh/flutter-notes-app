@@ -21,8 +21,7 @@ class NoteList extends StatelessWidget {
           var note = notes[index];
           return _buildNote(note);
         },
-        staggeredTileBuilder: (int index) =>
-            new StaggeredTile.count(2, index.isEven ? 1 : 1),
+        staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
       );
@@ -40,33 +39,34 @@ class NoteList extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Row(
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    note.title,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      // decoration: note.done ? TextDecoration.lineThrough : null,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      note.title,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    note.description,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.normal,
-                      // decoration: note.done ? TextDecoration.lineThrough : null,
+                    const SizedBox(height: 10),
+                    Text(
+                      note.description,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '${note.created.hour}:${note.created.minute}:'
-                    '${note.created.second}',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[800]),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+                    Text(
+                      '${note.created.hour}:${note.created.minute}:'
+                      '${note.created.second}',
+                      style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+                    ),
+                  ],
+                ),
               ),
-              Spacer(),
               IconButton(
                 iconSize: 30,
                 icon: Icon(Icons.edit),
