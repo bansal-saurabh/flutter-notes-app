@@ -11,7 +11,7 @@ class NoteList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (notes.isEmpty) {
       return Center(
-        child: Text('Noting to do... Great!'),
+        child: Text('No notes created yet!'),
       );
     } else {
       return StaggeredGridView.countBuilder(

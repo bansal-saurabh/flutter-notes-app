@@ -1,9 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_notes_app/note.dart';
 import 'package:flutter_notes_app/notes_list.dart';
+import 'package:flutter_notes_app/new_note_page.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -17,25 +17,7 @@ void main() async {
     ..description = 'The note has been created by this note-taking app itself.'
     ..created = DateTime.now();
 
-  var note2 = Note()
-    ..title = 'Note 2'
-    ..description = 'The note has been created by this note-taking app itself.'
-    ..created = DateTime.now();
-
-  var note3 = Note()
-    ..title = 'Note 3'
-    ..description = 'The note has been created by this note-taking app itself.'
-    ..created = DateTime.now();
-
-  var note4 = Note()
-    ..title = 'Note 4'
-    ..description = 'The note has been created by this note-taking app itself.'
-    ..created = DateTime.now();
-
   // box.put('Note1', note1);
-  // box.put('Note2', note2);
-  // box.put('Note3', note3);
-  // box.put('Note4', note4);
 
   runApp(MyApp());
 }
@@ -87,17 +69,9 @@ class NoteMainScreen extends StatelessWidget {
         child: Icon(Icons.add, color: Colors.white),
         tooltip: 'New Note',
         onPressed: () {
-          ++i;
-          addNote(i);
-        }
-        // onPressed: () {
-        //   showDialog(
-        //     context: context,
-        //     builder: (context) {
-        //       return NewNotePage();
-        //     },
-        //   );
-        // },
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => NewNotePage()));
+        },
       ),
     );
   }
@@ -111,18 +85,11 @@ class NoteMainScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Notes Grid',
-              style: TextStyle(fontSize: 32),
+              'Notes',
+              style: TextStyle(fontSize: 28),
             ),
             const SizedBox(width: 20),
           ],
-        ),
-        const SizedBox(height: 10),
-        Text(
-          kIsWeb
-              ? 'Refresh this tab to test persistence.'
-              : 'Restart the app to test persistence.',
-          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 40),
         Expanded(
